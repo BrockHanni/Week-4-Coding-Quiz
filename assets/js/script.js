@@ -28,6 +28,10 @@ var questionsArray= [
 // vars to pull from document
 var startBtn = document.getElementById("startBtn")
 var timerEl = document.querySelector(".timer")
+var questionAnswers = document.getElementById('questionAnswers')
+var questionNumber= 0
+var feedback = document.getElementById("feedback")
+
 for (let i = 0; i<questionsArray.length;i++){
     var currentQuestion = questionsArray[i]
 
@@ -54,8 +58,9 @@ function startQuiz(){
     getQuestions()
 }
 function getQuestions(){
+    var currentQuestion = questionsArray[questionNumber]
     var questionTitle = document.getElementById('questionTitle')
-    var questionAnswers = document.getElementById('questionAnswers')
+    
     questionTitle.textContent = currentQuestion.title
 
     // for loop to create buttons for each answer
@@ -67,6 +72,32 @@ function getQuestions(){
         choicebtn.textContent= choice
         questionAnswers.appendChild(choicebtn)
     }
+}
+
+function answerClick(event){
+
+ var answerBtn = event.target
+
+ if (!answerBtn.matches('.choice')){
+        return
+ }
+    // does nothing if user doesn't click on a button
+
+ if(answerBtn.value = questionsArray[questionNumber].answer){
+        feedback.textContent = "Correct!"
+    } else {
+        timer -= 10
+
+        if (timer < 0){
+            timer = 0
+        }
+
+        timerCount.textContent= timer
+        feedback.textContent="Wrong!"
+ }
+    // setInterval to show feedback for a second
+    questionNumber++
+
 }
 
 function startTimer(){
@@ -84,3 +115,4 @@ function endQuiz(){
     clearInterval(timerEl)
 }
 startBtn.addEventListener("click",startQuiz)
+questionAnswers.onclick= answerClick
