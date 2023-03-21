@@ -1,5 +1,5 @@
 // this var creates stores the questions answers and choices in an array
-var questions = [
+var questionsArray= [
 {
     title: "Which brackets are used to make an array?",
     choices: ["(parentheses)","{curly brackets}","[square brackets]",'"quotes"'],
@@ -28,25 +28,52 @@ var questions = [
 // vars to pull from document
 var startBtn = document.getElementById("startBtn")
 var timerEl = document.querySelector(".timer")
+for (let i = 0; i<questionsArray.length;i++){
+    var currentQuestion = questionsArray[i]
 
-
+    // for (var i = 0; i < currentQuestion.choices.length; i++) {
+      
+    //   var choice = currentQuestion.choices[i];
+      
+    //   console.log(choice);
+    // }
+   
+  }
 
 // fuction for start button to start the quiz
 function startQuiz(){
     startBtn.disabled= true
-    document.getElementById("start-screen").style.display= "none"
+    // hides start button
+    document.getElementById("start-screen").style.display= "none" 
+    // hides starting screen
+    document.getElementById("questionAnchor").style.display = "contents"
+    // shows the question screen
     
     timerCount= 5;
-    startTimer()
-    
+    startTimer()  
+    getQuestions()
+}
+function getQuestions(){
+    var questionTitle = document.getElementById('questionTitle')
+    var questionAnswers = document.getElementById('questionAnswers')
+    questionTitle.textContent = currentQuestion.title
+
+    // for loop to create buttons for each answer
+    for(var i=0; i < currentQuestion.choices.length; i++){
+        var choice = currentQuestion.choices[i];
+        var choicebtn= document.createElement('button')
+        choicebtn.setAttribute('class','answerBtns')
+        choicebtn.setAttribute('value', choice)
+        choicebtn.textContent= choice
+        questionAnswers.appendChild(choicebtn)
+    }
 }
 
 function startTimer(){
     timer = setInterval(function(){
         timerCount--;
-        timerEl.textContent = timerCount;
-
-       
+        timerEl.textContent = timerCount
+      
     }, 1000)
     if(timerCount <= 0){
     endQuiz();
