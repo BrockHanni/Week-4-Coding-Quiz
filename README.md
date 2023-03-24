@@ -9,13 +9,9 @@ When you click on the start quiz button:
 
         -if the user clicks the incorrect choice:
 
-            -a sound will play 
-
             -15 seconds will be removed from the timer
 
         -if the user clicks the correct choice:
-
-            -A sound will be played
 
             -No time will be docked
 
@@ -44,6 +40,6 @@ When you click on the start quiz button:
 
 Screenshot of working app: ![Screenshot](assets/images/WorkingQuiz.jpg)
 
-Link to deployed app:
+Link to deployed app: https://brockhanni.github.io/Week-4-Coding-Quiz/
 
 -Note: App includes a highscores button, it doesn't open the card, as I made the decision to just show the highscores on site

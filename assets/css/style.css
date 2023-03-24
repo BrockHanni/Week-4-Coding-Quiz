@@ -75,6 +75,10 @@ button{
     margin: 5px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
+    button:hover{
+        background-color: blue;
+        color:white;
+    }
 #feedbackDiv{
     background-color:#087e8b;
     color:#f7f7ff;
