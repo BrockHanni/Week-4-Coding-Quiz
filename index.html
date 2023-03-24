@@ -8,45 +8,57 @@
     <link rel="stylesheet" href="./assets/css/style.css"/>
      
 </head>
-<header>
-    <!-- timer -->
-    <div class ="timersection">
-        <div class="timer"> <span id="timer"></span>Good Luck</div>
-    </div>
-    <div id="score" class="hidden"></div>
-
-    
-
-</header>
 <body>
-
-    <div id="start-screen" class="start">
-        <h1>Coding Quiz!</h1>
-        <p>Answer the questions within the time limit!</p> 
-        <!-- start button -->
-        <button id ="startBtn" class="start">Start</button>
-    </div>
-    <!-- todo: -->
-  
     <!-- div for questions -->
-    <div id="questionAnchor" style="display:none">
-        <h1 id="questionTitle"></h1>
-        <div id="questionAnswers"></div>
-    </div>
-    <h4 id="feedback"></h4>
-        <!-- correct or incorrect noises -->
-    <div>
-        <button id="reset" class="hidden">Start Over</button>
-    </div>
-    <!-- high score card --> 
-    <div id="highscoreList">
-        <h4>Highscores</h4>
+    <div class="card">
+        <div class="right">
+            <div id="start-screen" class="start">
+                <h1>Coding Quiz!</h1>
+                <p>Answer the questions within the time limit!</p> 
+                
+                <!-- start button -->
+                <button id ="startBtn" class="start">Start</button>
+            </div>
+
+
+           
+            
+            <div id="questionAnchor" style="display:none">
+                <h1 id="questionTitle"></h1>
+                
+                <div id="questionAnswers"></div>
+
+                         <div id="feedbackDiv" style="display:none">
+
+                    <p id="feedback"></p></div>
+                </div>
+
+                <div id="timer" class ="timersection hidden">
+                    <div class="timer"> <span id="timer"></span></div> 
+                    <div id="score" class="hidden"></div>     
+                </div>
+            
+            <div>
+                <button id="reset" class="hidden">Start Over</button>
+            </div>
+        </div>
 
     </div>
-    <div>
-        <button id="seeHS">Highscores</button>
-        <button id="clearStorage">Clear Highscores</button>
+
+   
+        <!-- correct or incorrect noises -->
+
+    <!-- high score card --> 
+    <div class="highscoreCard">
+        <div id="highscoreList">
+            <h1>Highscores</h1>
+        </div>
+        <div>
+            <button id="seeHS">Highscores</button>
+            <button id="clearStorage">Clear Highscores</button>
+        </div>
     </div>
+
 
     
     

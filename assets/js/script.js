@@ -48,11 +48,8 @@ function startQuiz(){
     document.getElementById("start-screen").style.display= "none" 
     // hides starting screen
     document.getElementById("questionAnchor").style.display = "contents"
-
     document.getElementById("score").style.display = "contents"
-    
-    // shows the question screen
-    
+    document.getElementById("timer").style.display = "contents"
     timerCount= 60;
     startTimer()  
     getQuestions()
@@ -61,6 +58,7 @@ function getQuestions(){
     
     var currentQuestion = questionsArray[questionNumber]
     var questionTitle = document.getElementById('questionTitle')
+    document.getElementById("questionAnchor").style.display = "flex"
     
     questionTitle.textContent = currentQuestion.title
 
@@ -78,6 +76,7 @@ function getQuestions(){
 function answerClick(event){
  
  var answerBtn = event.target
+ document.getElementById("feedbackDiv").style.display="contents"
  if (answerBtn.value !== questionsArray[questionNumber].answer){
         timerCount -= 15
         feedback.textContent="Wrong!"
@@ -147,9 +146,8 @@ function saveScore(){
 }
 
 
-// highscore card
 
-
+// highscore list
 function displayHighScores() {
     var highScores = JSON.parse(localStorage.getItem('highscores')) || [];
     var highScoreList = document.getElementById("highscoreList");
