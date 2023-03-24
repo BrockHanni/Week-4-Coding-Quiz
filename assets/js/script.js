@@ -39,7 +39,7 @@ scoreDisplay.textContent = `Score: ${score}/5`;
 
 for (let i = 0; i<questionsArray.length;i++){
     var currentQuestion = questionsArray[i]
-  }
+}
 
 // fuction for start button to start the quiz
 function startQuiz(){
@@ -48,8 +48,11 @@ function startQuiz(){
     document.getElementById("start-screen").style.display= "none" 
     // hides starting screen
     document.getElementById("questionAnchor").style.display = "contents"
+
     document.getElementById("score").style.display = "contents"
+
     document.getElementById("timer").style.display = "contents"
+
     timerCount= 60;
     startTimer()  
     getQuestions()

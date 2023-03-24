@@ -1,29 +1,49 @@
-# User Story
-AS A coding boot camp student
+# Coding Quiz
+When you click on the start quiz button:
 
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
+    -A countdown of 60 seconds will start;
 
-SO THAT I can gauge my progress compared to my peers
+    -A question will come up on the screen;
 
-# Acceptance Criteria
-GIVEN I am taking a code quiz
+    -4 buttons with the choices will appear;
 
-WHEN I click the start button
+        -if the user clicks the incorrect choice:
 
-THEN a timer starts and I am presented with a question
+            -a sound will play 
 
-WHEN I answer a question
+            -15 seconds will be removed from the timer
 
-THEN I am presented with another question
+        -if the user clicks the correct choice:
 
-WHEN I answer a question incorrectly
+            -A sound will be played
 
-THEN time is subtracted from the clock
+            -No time will be docked
 
-WHEN all questions are answered or the timer reaches 0
+            -A point will be added to the score count
 
-THEN the game is over
+        -if time runs out:
 
-WHEN the game is over
+            -User will be asked for initals
 
-THEN I can save my initials and score
+            -User initials and score will be added to the highscore array, in LocalStorage()
+
+            -The array will be pulled on screen, in the highscore card
+
+                -In the same card, user can click a button to clear localStorage(), clearing the card
+
+            -A Start Over button appears in the quiz card
+
+        -if a user completes the test with time remaining
+
+            -The message "Congrats!" will pop up on screen
+
+            -User will ask for thier initals
+
+            -User initials will be added to localstorage, and the highscore card
+
+
+Screenshot of working app: ![Screenshot](assets/images/WorkingQuiz.jpg)
+
+Link to deployed app:
+
+-Note: App includes a highscores button, it doesn't open the card, as I made the decision to just show the highscores on site
