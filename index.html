@@ -11,11 +11,9 @@
 <header>
     <!-- timer -->
     <div class ="timersection">
-        <div class="timer"> <span id="timer"></span>Timer</div>
+        <div class="timer"> <span id="timer"></span>Good Luck</div>
     </div>
-    <!-- highscores link/page-->
-    <h4 class="highscorelink">Highscores</h4>
-    <div id="score"></div>
+    <div id="score" class="hidden"></div>
 
     
 
@@ -37,7 +35,19 @@
     </div>
     <h4 id="feedback"></h4>
         <!-- correct or incorrect noises -->
-    <!-- score screen, high score page --> 
+    <div>
+        <button id="reset" class="hidden">Start Over</button>
+    </div>
+    <!-- high score card --> 
+    <div id="highscoreList">
+        <h4>Highscores</h4>
+
+    </div>
+    <div>
+        <button id="seeHS">Highscores</button>
+        <button id="clearStorage">Clear Highscores</button>
+    </div>
+
     
     
  <script src="./assets/js/script.js"></script>

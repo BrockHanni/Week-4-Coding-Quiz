@@ -33,6 +33,7 @@ var questionNumber= 0
 var feedback = document.getElementById("feedback")
 var score = 0
 
+
 var scoreDisplay = document.getElementById('score')
 scoreDisplay.textContent = `Score: ${score}/5`;
 
@@ -47,6 +48,8 @@ function startQuiz(){
     document.getElementById("start-screen").style.display= "none" 
     // hides starting screen
     document.getElementById("questionAnchor").style.display = "contents"
+
+    document.getElementById("score").style.display = "contents"
     
     // shows the question screen
     
@@ -81,7 +84,7 @@ function answerClick(event){
         answerBtn.disabled = true
         if (timerCount < 0){
             timerCount = 0
-            quizEnd()
+            endQuiz()
         }
 
         
@@ -118,14 +121,61 @@ function endQuiz(){
     timerEl.textContent = "Time's up :("
     document.getElementById("questionAnchor").style.display = "none"
     feedback.textContent= "Better luck next time"
-    scoreDisplay.textContent = `Score: ${score}/5`;
+    scoreDisplay.textContent = `Score: ${score}/5`
+    saveScore()
 }
 function winQuiz(){
     clearInterval(timer)
     timerEl.textContent = "You did it!"
     document.getElementById("questionAnchor").style.display = "none"
     feedback.textContent= "Congrats"
-    scoreDisplay.textContent = `Score: ${score}/5`;
+    scoreDisplay.textContent = `Score: ${score}/5`
+    saveScore()
+} 
+
+function saveScore(){
+    var highscores = JSON.parse(localStorage.getItem('highscores')) || [];
+    var newHighscore = {
+    initials: prompt('Enter your initials:'),
+    score: score
+    };
+    highscores.push(newHighscore);
+    localStorage.setItem('highscores', JSON.stringify(highscores));
+    displayHighScores()
+    startBtn.disabled= false
+    document.getElementById("reset").removeAttribute("class", "hidden")
 }
+
+
+// highscore card
+
+
+function displayHighScores() {
+    var highScores = JSON.parse(localStorage.getItem('highscores')) || [];
+    var highScoreList = document.getElementById("highscoreList");
+    highScoreList.innerHTML = "<h4>Highscores</h4>";
+    if (highScores.length === 0) {
+      highScoreList.innerHTML += "<p>No high scores yet</p>";
+    } else {
+      highScores.forEach(function(score) {
+          highScoreList.innerHTML += "<p>" + score.initials + ": " + score.score +"/5" + "</p>";
+      });
+    }
+    highScoreList.style.display = "block";
+  }
+//   Btn to see highscore (I don't need this, but I'm too attached to delete it)
+document.getElementById("seeHS").addEventListener("click", displayHighScores())
+//   clears highscore list
+  var clearStorageBtn = document.getElementById("clearStorage")
+  clearStorageBtn.addEventListener("click", clearLocalStorage)
+  function clearLocalStorage() {
+    localStorage.clear();
+    location.reload()
+  }
+
+// Reset btn, refreshes page
+document.getElementById("reset").addEventListener("click",function(){
+    location.reload()
+})
 startBtn.addEventListener("click",startQuiz)
 questionAnswers.onclick= answerClick
