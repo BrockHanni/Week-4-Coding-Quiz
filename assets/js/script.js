@@ -13,7 +13,7 @@ var questionsArray= [
 {
     title: "In javascript, what command is opposite of .setAttribute?",
     choices: [".clearAttribute",".deleteAttribute",".resetAttriubute",".removeAttribute"],
-    answer:"",
+    answer:".removeAttribute",
 },
 {
     title: "Css can be used to greatly improve the ____ of an HTML form.",
@@ -31,17 +31,13 @@ var timerEl = document.querySelector(".timer")
 var questionAnswers = document.getElementById('questionAnswers')
 var questionNumber= 0
 var feedback = document.getElementById("feedback")
+var score = 0
+
+var scoreDisplay = document.getElementById('score')
+scoreDisplay.textContent = `Score: ${score}/5`;
 
 for (let i = 0; i<questionsArray.length;i++){
     var currentQuestion = questionsArray[i]
-
-    // for (var i = 0; i < currentQuestion.choices.length; i++) {
-      
-    //   var choice = currentQuestion.choices[i];
-      
-    //   console.log(choice);
-    // }
-   
   }
 
 // fuction for start button to start the quiz
@@ -51,13 +47,15 @@ function startQuiz(){
     document.getElementById("start-screen").style.display= "none" 
     // hides starting screen
     document.getElementById("questionAnchor").style.display = "contents"
+    
     // shows the question screen
     
-    timerCount= 5;
+    timerCount= 60;
     startTimer()  
     getQuestions()
 }
 function getQuestions(){
+    
     var currentQuestion = questionsArray[questionNumber]
     var questionTitle = document.getElementById('questionTitle')
     
@@ -75,44 +73,59 @@ function getQuestions(){
 }
 
 function answerClick(event){
-
+ 
  var answerBtn = event.target
-
- if (!answerBtn.matches('.choice')){
-        return
- }
-    // does nothing if user doesn't click on a button
-
- if(answerBtn.value = questionsArray[questionNumber].answer){
-        feedback.textContent = "Correct!"
-    } else {
-        timer -= 10
-
-        if (timer < 0){
-            timer = 0
+ if (answerBtn.value !== questionsArray[questionNumber].answer){
+        timerCount -= 15
+        feedback.textContent="Wrong!"
+        answerBtn.disabled = true
+        if (timerCount < 0){
+            timerCount = 0
+            quizEnd()
         }
 
-        timerCount.textContent= timer
-        feedback.textContent="Wrong!"
- }
-    // setInterval to show feedback for a second
+        
+    } 
+    if (answerBtn.value === questionsArray[questionNumber].answer) {  
+        feedback.textContent = "Correct!"
+        score++
+        }
+    scoreDisplay.textContent = `Score: ${score}/5`;
+    questionAnswers.innerHTML= ''
+    // hides remaining answers
     questionNumber++
 
+    if (questionNumber === questionsArray.length){
+         winQuiz()
+    } else{
+        getQuestions()
+    }
 }
 
 function startTimer(){
     timer = setInterval(function(){
         timerCount--;
-        timerEl.textContent = timerCount
-      
+        timerEl.textContent = timerCount + ' seconds left!'
+      if(timerCount < 1){
+        endQuiz();
+        }
     }, 1000)
-    if(timerCount <= 0){
-    endQuiz();
-}}
-
+    
+}
 
 function endQuiz(){
-    clearInterval(timerEl)
+    clearInterval(timer)
+    timerEl.textContent = "Time's up :("
+    document.getElementById("questionAnchor").style.display = "none"
+    feedback.textContent= "Better luck next time"
+    scoreDisplay.textContent = `Score: ${score}/5`;
+}
+function winQuiz(){
+    clearInterval(timer)
+    timerEl.textContent = "You did it!"
+    document.getElementById("questionAnchor").style.display = "none"
+    feedback.textContent= "Congrats"
+    scoreDisplay.textContent = `Score: ${score}/5`;
 }
 startBtn.addEventListener("click",startQuiz)
 questionAnswers.onclick= answerClick
